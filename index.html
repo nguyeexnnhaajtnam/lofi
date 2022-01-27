@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Lofi</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://lofi.co/favicon.ico">
+    <!-- Link Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- MAIN -->
+    <div class="background-video position-relative">
+        <!-- Navbar -->
+        <div class="nav container-fluid control-bar position-fixed justify-content-end px-5 my-5" style="z-index: 10;">
+            <!-- Change mode button -->
+            <div>
+                <input type="checkbox" class="checkbox" id="checkbox">
+                <label id="label" for="checkbox" class="label">
+                    <i class="fas fa-moon"></i>
+                    <i class='fas fa-sun'></i>
+                    <div id="ball" class='ball'>
+                    </div>
+                </label>
+            </div>
+            <!-- Fullscreen button -->
+            <div class="mx-5">
+                <i id="full-screen" class="fas fa-expand"></i>
+            </div>
+        </div>
+        <!-- FEATURE BOARD -->
+        <!-- Feature board control -->
+        <div id="feature-board"
+            style="top: 35%; right: 5%; width: 3.5%; height: 30%; border-radius: 30px; background-color: var(--rgba-color); z-index: 10;"
+            class="feature-board position-fixed d-flex flex-column align-items-center justify-content-around">
+            <div id="config-btn" class="d-flex align-items-center justify-content-center"
+                style="border-radius: 30px 30px 0 0; height: 100%; width: 100%;">
+                <a><i class="fas fa-cog"></i></a>
+            </div>
+            <div class="d-flex align-items-center justify-content-center" style="height: 100%; width: 100%;"><a><i
+                        class="fab fa-itunes-note"></i></a></div>
+            <div class="d-flex align-items-center justify-content-center" style="height: 100%; width: 100%;"><a><i
+                        class="fas fa-image"></i></a></div>
+            <div class="d-flex align-items-center justify-content-center"
+                style="border-radius: 0 0 30px 30px; height: 100%; width: 100%; z-index: 40;"><a><i
+                        class="fas fa-info"></i></a>
+            </div>
+        </div>
+        <!-- Feature board modal -->
+        <!-- ---Config Modal -->
+        <div id="config-modal" class="feature-board-modal position-fixed"
+            style="width: 20%; height: 28%; background-color: var(--black-color); right: 8.5%; top: 25%; border-radius: 20px; z-index: 10; opacity: 0;">
+            <h4 style="width: 100%; text-align: center;" class="my-3 text-white">Mood</h4>
+            <div class="container d-flex justify-content-around" style="height: 35%;">
+                <div class="mood-button-light py-3 text-center"
+                    style="height: 100%; width: 100%; background-color: var(--semi-black-color); margin: 0 5px; border-radius: 20px;">
+                    <a id="jazz-btn"><i id="jazz-icon" class="fas fa-cocktail"></i>
+                        <p id="jazz-content" style="font-size: 20px;">Jazzy</p>
+                    </a>
+                </div>
+                <div class="mood-button-light py-3 text-center"
+                    style="height: 100%; width: 100%; background-color: var(--semi-black-color); margin: 0 5px; border-radius: 20px;">
+                    <a id="chill-btn"><i id="chill-icon" class="fas fa-guitar"></i>
+                        <p id="chill-content" style="font-size: 20px;">Chilly</p>
+                    </a>
+                </div>
+                <div class="mood-button-light py-3 text-center"
+                    style="height: 100%; width: 100%; background-color: var(--semi-black-color); margin: 0 5px; border-radius: 20px;">
+                    <a id="sleep-btn"><i id="sleep-icon" class="fas fa-cloud-moon"></i>
+                        <p id="sleep-content" style="font-size: 20px;">Sleepy</p>
+                    </a>
+                </div>
+            </div>
+            <!-- Volume slider -->
+            <div class="slidecontainer mt-5">
+                <i class="fas fa-volume-mute mx-3"></i>
+                <input type="range" min="0" max="100" value="50">
+                <i class="fas fa-volume-up mx-3"></i>
+            </div>
+        </div>
+        <!-- ---Noises Modal -->
+        <div style="top: 20%; right: 10%; text-align: center; z-index: 20;"
+            class="feature-board-modal position-absolute">
+            <a>
+                <i class="fas fa-circle-notch"></i>
+                <i onclick="Rain()" class="fas fa-circle"></i>
+                <p class="hover-circle px-4 py-2 mt-2 text-white">City rain</p>
+            </a>
+        </div>
+        <div style="top: 30%; left: 2%; text-align: center; z-index: 20;" class="feature-board-modal position-absolute">
+            <a>
+                <i class="fas fa-circle-notch"></i>
+                <i onclick="Traffic()" class="fas fa-circle" style="left: 44%; top: 9%;"></i>
+                <p class="hover-circle px-4 py-2 mt-2 text-white">People talking</p>
+            </a>
+        </div>
+        <!-- ---Image Modal -->
+        <!-- ---Info Modal -->
+        <div id="info-modal" class="feature-board-modal position-fixed"
+            style="display: none; height: 100%; width: 100%; background-color: var(--rgba-dark-color); z-index: 30;">
+            <div class="close-info-modal position-absolute d-flex justify-content-center"
+                style="top: 50%; left: 50%; width: 5%; height: 3%; border-radius: 20px; border: 1px solid white;">
+                <p class="text-white font-weight-bold">Ok, got it !</p>
+            </div>
+        </div>
+        <!-- Top corner -->
+        <img id="corner-top" class="corner" src="./assets/background/lateral_bottom.849fd226.svg" alt="">
+        <!-- Background-video -->
+        <div style="z-index: -1000;" class="background-video-container">
+            <div class="bgvideo-light">
+                <div>
+                    <video id="day" autoplay muted loop src="assets/background/BDR Day 112521 (1).mp4"
+                        style="display: block;"></video>
+                </div>
+                <div>
+                    <video id="day-rainy" autoplay muted loop src="assets/background/BDR RAINY DAY.mp4"
+                        style="display: none;"></video>
+                </div>
+            </div>
+            <div class="bgvideo-dark">
+                <div>
+                    <video id="night" autoplay muted loop src="assets/background/BDR STARRY NIGHT -.mp4"
+                        style="display: none;"></video>
+                </div>
+                <div>
+                    <video id="night-rainy" autoplay muted loop src="assets/background/BDR RAINY NIGHT.mp4"
+                        style="display: none;"></video>
+                </div>
+            </div>
+        </div>
+        <!-- Pause/Play button -->
+        <div id="pause-btn" class="position-fixed" style="bottom: 5%; left: 50%;">
+            <i class="far fa-pause-circle"></i>
+        </div>
+        <div id="play-btn" class="position-fixed" style="bottom: 5%; left: 50%;  display: none;">
+            <i class="far fa-play-circle"></i>
+        </div>
+    </div>
+    <!-- AUDIO -->
+    <div class="bg-music">
+        <audio id="jazz" loop autoplay src="./assets/music/Jazz Voyage - Jazz Voyage.mp3"></audio>
+        <audio id="chill" loop src="./assets/music/sleeping in - sad.exe.mp3"></audio>
+        <audio id="sleep" loop src="./assets/music/sleepy_16.mp3"></audio>
+    </div>
+    <div class="bg-noises">
+        <audio id="rain-noise" loop src="./assets/audio/rain_city.mp3"></audio>
+        <audio id="traffic-noise" loop src="./assets/audio/people_talk_inside.mp3"></audio>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

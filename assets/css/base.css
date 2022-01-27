@@ -1,0 +1,42 @@
+:root {
+  --light-color: #f3a952;
+  --dark-color: #6d7fd5;
+  --white-color: #ffffff;
+  --black-color: #070707;
+  --semi-black-color: rgb(20, 20, 29);
+  --rgba-color: rgba(0, 0, 0, 0.5);
+  --rgba-dark-color: rgba(0, 0, 0, 0.801);
+  --rgba-white-color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes fade-in {
+  from {
+    filter: blur(5px);
+  }
+  to {
+    filter: blur(0);
+  }
+}
+
+p {
+  margin-bottom: 0;
+}
+
+p:hover,
+h4:hover {
+  cursor: default;
+}
+
+.slidecontainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#config-modal {
+  animation: fade-in 2s ease-in-out;
+}
+
+.visuallyHidden {
+  opacity: 0;
+}
