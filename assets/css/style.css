@@ -131,7 +131,8 @@ video {
 
 .fa-volume-mute,
 .fa-volume-up {
-  font-size: 28px;
+  font-size: 20px;
+  color: var(--light-color);
 }
 
 .feature-board > .mood-button:hover {
@@ -187,7 +188,20 @@ video {
 }
 
 /* Info Modal */
-#info-modal > div:hover {
+#info-modal > .close-info-modal:hover {
   cursor: pointer;
   background-color: var(--rgba-white-color);
+}
+#info-modal > .music-popup:hover {
+  cursor: default;
+}
+
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid var(--white-color);
+  bottom: -10px;
+  right: 20px;
 }

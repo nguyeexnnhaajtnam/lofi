@@ -45,15 +45,27 @@
             class="feature-board position-fixed d-flex flex-column align-items-center justify-content-around">
             <div id="config-btn" class="d-flex align-items-center justify-content-center"
                 style="border-radius: 30px 30px 0 0; height: 100%; width: 100%;">
-                <a><i class="fas fa-cog"></i></a>
+                <a>
+                    <i class="fas fa-cog"></i>
+                </a>
             </div>
-            <div class="d-flex align-items-center justify-content-center" style="height: 100%; width: 100%;"><a><i
-                        class="fab fa-itunes-note"></i></a></div>
-            <div class="d-flex align-items-center justify-content-center" style="height: 100%; width: 100%;"><a><i
-                        class="fas fa-image"></i></a></div>
-            <div class="d-flex align-items-center justify-content-center"
-                style="border-radius: 0 0 30px 30px; height: 100%; width: 100%; z-index: 40;"><a><i
-                        class="fas fa-info"></i></a>
+            <div id="note-btn" class="d-flex align-items-center justify-content-center"
+                style="height: 100%; width: 100%;">
+                <a>
+                    <i class="fab fa-itunes-note"></i>
+                </a>
+            </div>
+            <div id="img-btn" class="d-flex align-items-center justify-content-center"
+                style="height: 100%; width: 100%;">
+                <a>
+                    <i class="fas fa-image"></i>
+                </a>
+            </div>
+            <div id="info-btn" class="d-flex align-items-center justify-content-center"
+                style="border-radius: 0 0 30px 30px; height: 100%; width: 100%;">
+                <a>
+                    <i class="fas fa-info"></i>
+                </a>
             </div>
         </div>
         <!-- Feature board modal -->
@@ -82,9 +94,9 @@
                 </div>
             </div>
             <!-- Volume slider -->
-            <div class="slidecontainer mt-5">
+            <div class="slidecontainer mt-5 align-items-center">
                 <i class="fas fa-volume-mute mx-3"></i>
-                <input type="range" min="0" max="100" value="50">
+                <input id="volume-input" type="range" min="0" max="100" step="0.5" value="50" onchange="changeVolume()">
                 <i class="fas fa-volume-up mx-3"></i>
             </div>
         </div>
@@ -108,9 +120,14 @@
         <!-- ---Info Modal -->
         <div id="info-modal" class="feature-board-modal position-fixed"
             style="display: none; height: 100%; width: 100%; background-color: var(--rgba-dark-color); z-index: 30;">
-            <div class="close-info-modal position-absolute d-flex justify-content-center"
-                style="top: 50%; left: 50%; width: 5%; height: 3%; border-radius: 20px; border: 1px solid white;">
-                <p class="text-white font-weight-bold">Ok, got it !</p>
+            <div class="close-info-modal position-absolute d-flex justify-content-center align-items-center"
+                style="top: 50%; left: 50%; width: 5%; height: 4%; border-radius: 10px; border: 2px solid white;">
+                <a id="close-info-modal" class="text-white font-weight-bold">Ok, got it !</a>
+            </div>
+            <div class="music-popup position-absolute d-flex justify-content-center align-items-center"
+                style="width: 8%; height: 4%; top: 30%; right: 5.5%; border-radius: 10px;background-color: var(--white-color); color: var(--black-color); font-weight: bold;">
+                Choose music here
+                <div class="triangle-down position-absolute"></div>
             </div>
         </div>
         <!-- Top corner -->
@@ -139,16 +156,16 @@
             </div>
         </div>
         <!-- Pause/Play button -->
-        <div id="pause-btn" class="position-fixed" style="bottom: 5%; left: 50%;">
+        <div id="pause-btn" class="position-fixed" style="bottom: 5%; left: 50%; display: block;">
             <i class="far fa-pause-circle"></i>
         </div>
-        <div id="play-btn" class="position-fixed" style="bottom: 5%; left: 50%;  display: none;">
+        <div id="play-btn" class="position-fixed" style="bottom: 5%; left: 50%; display: none;">
             <i class="far fa-play-circle"></i>
         </div>
     </div>
     <!-- AUDIO -->
     <div class="bg-music">
-        <audio id="jazz" loop autoplay src="./assets/music/Jazz Voyage - Jazz Voyage.mp3"></audio>
+        <audio id="jazz" loop src="./assets/music/Jazz Voyage - Jazz Voyage.mp3"></audio>
         <audio id="chill" loop src="./assets/music/sleeping in - sad.exe.mp3"></audio>
         <audio id="sleep" loop src="./assets/music/sleepy_16.mp3"></audio>
     </div>

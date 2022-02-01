@@ -4,6 +4,9 @@ var fullScreen = document.getElementById("full-screen");
 var pauseBtn = document.getElementById("pause-btn");
 var playBtn = document.getElementById("play-btn");
 var configBtn = document.getElementById("config-btn");
+var infoBtn = document.getElementById("info-btn");
+var infoModal = document.getElementById("info-modal");
+var closeInfoModal = document.getElementById("close-info-modal");
 var elem = document.documentElement;
 var isRender = false;
 // DAY
@@ -29,10 +32,28 @@ var sleepIcon = document.getElementById("sleep-icon");
 var sleepContent = document.getElementById("sleep-content");
 // NOISE
 var rainNoise = document.getElementById("rain-noise");
-rainNoise.volume = 0.2;
 var trafficNoise = document.getElementById("traffic-noise");
-trafficNoise.volume = 0.5;
+// VOLUME
+// .chrome styling Vanilla JS
 
+const slider = document.getElementById("volume-input");
+const min = slider.min;
+const max = slider.max;
+const value = slider.value;
+
+slider.style.background = `linear-gradient(to right, var(--light-color) 0%, var(--light-color) ${
+  ((value - min) / (max - min)) * 100
+}%, var(--semi-black-color) ${
+  ((value - min) / (max - min)) * 100
+}%, var(--semi-black-color) 100%)`;
+
+slider.oninput = function () {
+  this.style.background = `linear-gradient(to right, var(--light-color) 0%, var(--light-color) ${
+    ((this.value - this.min) / (this.max - this.min)) * 100
+  }%, var(--semi-black-color) ${
+    ((this.value - this.min) / (this.max - this.min)) * 100
+  }%, var(--semi-black-color) 100%)`;
+};
 // Day/Night button
 changeDayNight.onclick = function () {
   setTimeout(function () {
@@ -68,12 +89,16 @@ function Rain() {
 function changeRainDay() {
   setTimeout(function () {
     if (day.style.display == "block") {
+      rainNoise.play();
       day.style.display = "none";
       dayRainy.style.display = "block";
-      rainNoise.play();
+      night.style.display = "none";
+      nightRainy.style.display = "none";
     } else {
-      dayRainy.style.display = "none";
       rainNoise.pause();
+      night.style.display = "none";
+      nightRainy.style.display = "none";
+      dayRainy.style.display = "none";
       day.style.display = "block";
     }
   }, 500);
@@ -178,28 +203,34 @@ sleepBtn.onclick = function () {
   jazzContent.style.removeProperty("color");
 };
 
-// Pause Button
+// Pause/Play Button
+
 pauseBtn.onclick = function () {
-  if (jazzAudio.paused == false) {
-    jazzAudio.pause();
-    console.log("pause jazz");
-    chillAudio.currentTime = 0;
-    sleepAudio.currentTime = 0;
+  if (
+    jazzAudio.currentTime == 0 &&
+    chillAudio.currentTime == 0 &&
+    sleepAudio.currentTime == 0
+  ) {
+    infoModal.style.display = "block";
+  } else {
+    if (jazzAudio.paused == false) {
+      jazzAudio.pause();
+      chillAudio.currentTime = 0;
+      sleepAudio.currentTime = 0;
+    }
+    if (chillAudio.paused == false) {
+      chillAudio.pause();
+      jazzAudio.currentTime = 0;
+      sleepAudio.currentTime = 0;
+    }
+    if (sleepAudio.paused == false) {
+      sleepAudio.pause();
+      jazzAudio.currentTime = 0;
+      chillAudio.currentTime = 0;
+    }
+    pauseBtn.style.display = "none";
+    playBtn.style.display = "block";
   }
-  if (chillAudio.paused == false) {
-    chillAudio.pause();
-    console.log("pause chill");
-    jazzAudio.currentTime = 0;
-    sleepAudio.currentTime = 0;
-  }
-  if (sleepAudio.paused == false) {
-    sleepAudio.pause();
-    console.log("pause sleep");
-    jazzAudio.currentTime = 0;
-    chillAudio.currentTime = 0;
-  }
-  pauseBtn.style.display = "none";
-  playBtn.style.display = "block";
 };
 
 playBtn.onclick = function () {
@@ -209,7 +240,6 @@ playBtn.onclick = function () {
     sleepAudio.currentTime == 0
   ) {
     jazzAudio.play();
-    console.log("play jazz");
   }
   if (
     chillAudio.paused == true &&
@@ -217,7 +247,6 @@ playBtn.onclick = function () {
     sleepAudio.currentTime == 0
   ) {
     chillAudio.play();
-    console.log("play chill");
   }
   if (
     sleepAudio.paused == true &&
@@ -225,10 +254,32 @@ playBtn.onclick = function () {
     chillAudio.currentTime == 0
   ) {
     sleepAudio.play();
-    console.log("play sleep");
   }
   playBtn.style.display = "none";
   pauseBtn.style.display = "block";
 };
-
+// NOTE + IMAGE
+var noteBtn = document.getElementById("note-btn");
+var imgBtn = document.getElementById("img-btn");
+noteBtn.onclick = function () {
+  alert("Chưa có làm má ôi");
+};
+imgBtn.onclick = function () {
+  alert("Y như thằng ở trên");
+};
 // CLOSE MODAL
+closeInfoModal.onclick = function () {
+  infoModal.style.display = "none";
+};
+
+infoBtn.onclick = function () {
+  infoModal.style.display = "block";
+};
+
+// CHANGE VOLUME
+function changeVolume() {
+  var allAudios = document.getElementsByTagName("audio");
+  for (i = 0; i < allAudios.length; i++) {
+    allAudios[i].volume = slider.value / 100;
+  }
+}
