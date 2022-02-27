@@ -262,10 +262,10 @@ playBtn.onclick = function () {
 var noteBtn = document.getElementById("note-btn");
 var imgBtn = document.getElementById("img-btn");
 noteBtn.onclick = function () {
-  alert("Chưa có làm má ôi");
+  alert("");
 };
 imgBtn.onclick = function () {
-  alert("Y như thằng ở trên");
+  alert("");
 };
 // CLOSE MODAL
 closeInfoModal.onclick = function () {
